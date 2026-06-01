@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from urllib import request
 
-# Create your views here.
+from django.http import HttpResponse
+from django.shortcuts import redirect, render
+#from django.contrib.auth.models import User
+#from django.contrib.auth import authenticate, login
+#from django.contrib.auth.decorators import login_required
+
+def home(request):
+    return render(request, "home.html")
