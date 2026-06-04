@@ -41,6 +41,36 @@ def signup(request):
         password = request.POST["password"]
         confirm_password = request.POST["confirm_password"]
 
+        if len(password) < 8:
+            return render(request,"signup.html",
+                {
+                    "error": "Password must be at least 8 characters"
+                }
+            )
+
+        if not any(char.isupper() for char in password):
+            return render(request,"signup.html",
+                {
+                    "error":"Password must contain at least 1 uppercase letter"
+                }
+            )
+
+        if not any(char.isdigit() for char in password):
+            return render(request,"signup.html",
+                {
+                    "error":"Password must contain at least 1 number"
+                }
+            )
+
+        special_chars = "!@#$%^&*"
+
+        if not any(char in special_chars for char in password):
+            return render(request,"signup.html",
+                {
+                    "error": "Password must contain at least 1 special character"
+                }
+            )
+        
         if password != confirm_password:
 
             return render(request,"signup.html",
